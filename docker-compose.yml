@@ -1,0 +1,30 @@
+version: '3.4'
+
+services: 
+    api: 
+        build: .
+        image: cuadrangular
+        container_name: cuadrangular_futbol
+        volumes: 
+            - gosrc:/go
+            - .:/go/src/github.com/diagutierrezro/Cuadrangular
+        ports: 
+            - "6673:6673"
+
+        command: sh -c 'cd github.com/diagutierrezro/Cuadrangular; go get -v -u ./...; bee migrate -driver=postgres -conn="postgres://cuadrangular:cuadrangular@Cuadrangular_Futbol:5432/Cuadrangular_Futbol?sslmode=disable&search_path=public" || true; bee run -downdoc=true -gendoc=true'
+    db:
+        container_name: Cuadrangular_Futbol
+        image: postgres:12
+        ports:
+            - "8084:5432"
+        volumes: 
+            - postgres_data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_HOST=Cuadrangular_Futbol
+            - POSTGRES_DB=Cuadrangular_Futbol
+            - POSTGRES_USER=cuadrangular
+            - POSTGRES_PASSWORD=cuadrangular
+        
+volumes:
+    gosrc:
+    postgres_data:
