@@ -1,3 +1,6 @@
+## Modelo de DB
+![alt text](https://github.com/diagutierrezro/Cuadrangular/blob/master/Modelo%20db.jpeg)
+
 ## Comenzando 🚀
 
 _Instrucciones para obtener una copia del proyecto en funcionamiento en una máquina local para propósitos de desarrollo y pruebas._
